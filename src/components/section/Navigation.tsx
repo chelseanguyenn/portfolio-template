@@ -3,23 +3,28 @@ import { Menu, X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import DarkModeToggle from '../DarkModeToggle';
 import { useDarkMode } from '../../contexts/DarkModeContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { useThemeColors, withAlpha } from '../../hooks/useThemeColors';
+import { useClock } from '../../hooks/useClock';
+import { translations } from '../../constants/translations';
 
 const Navigation = () => {
   const [activeTab, setActiveTab] = useState('about');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { language, toggleLanguage } = useLanguage();
+  const clock = useClock(language);
   const themeColors = useThemeColors();
   const navigate = useNavigate();
   const location = useLocation();
 
   const tabs = useMemo(() => [
-    { id: 'about', label: 'About' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'skills', label: 'Skills' }
-  ], []);
+    { id: 'about', label: translations[language].nav.about },
+    { id: 'projects', label: translations[language].nav.projects },
+    { id: 'experience', label: translations[language].nav.experience },
+    { id: 'skills', label: translations[language].nav.skills }
+  ], [language]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -115,7 +120,7 @@ const Navigation = () => {
           }}
           onClick={() => window.location.href = '/'}
           aria-label="Your Name - Go to homepage">
-          Your Name
+          chelsea
         </button>
         
         {/* Desktop Navigation */}
@@ -131,7 +136,49 @@ const Navigation = () => {
               {tab.label}
             </button>
           ))}
-          <div className="ml-4">
+          <div className="ml-4 flex items-center gap-3">
+            {/* Live Clock */}
+            <div
+              style={{
+                padding: '6px 12px',
+                borderRadius: '8px',
+                background: withAlpha(themeColors.colors.pink[100], 0.3),
+                border: `1px solid ${themeColors.colors.pink[200]}`,
+                fontSize: '12px',
+                fontFamily: 'monospace',
+                color: themeColors.text.accent,
+                minWidth: '90px',
+                textAlign: 'center'
+              }}
+            >
+              {clock}
+            </div>
+
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              title={language === 'en' ? 'Switch to Tiếng Việt' : 'Switch to English'}
+              style={{
+                padding: '6px 12px',
+                borderRadius: '8px',
+                background: 'transparent',
+                border: `1px solid ${themeColors.colors.pink[200]}`,
+                color: themeColors.colors.pink[500],
+                cursor: 'pointer',
+                fontSize: '12px',
+                fontWeight: '600',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = withAlpha(themeColors.colors.pink[100], 0.3);
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'transparent';
+              }}
+            >
+              🌐 {language === 'en' ? 'VI' : 'EN'}
+            </button>
+
             <DarkModeToggle
               checked={isDarkMode}
               onChange={toggleDarkMode}
@@ -267,8 +314,48 @@ const Navigation = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            gap: '10px',
+            flexWrap: 'wrap'
           }}
         >
+          <div
+            style={{
+              padding: '6px 12px',
+              borderRadius: '8px',
+              background: withAlpha(themeColors.colors.pink[100], 0.3),
+              border: `1px solid ${themeColors.colors.pink[200]}`,
+              fontSize: '12px',
+              fontFamily: 'monospace',
+              color: themeColors.text.accent,
+              minWidth: '90px',
+              textAlign: 'center'
+            }}
+          >
+            {clock}
+          </div>
+          <button
+            onClick={toggleLanguage}
+            title={language === 'en' ? 'Switch to Tiếng Việt' : 'Switch to English'}
+            style={{
+              padding: '6px 12px',
+              borderRadius: '8px',
+              background: 'transparent',
+              border: `1px solid ${themeColors.colors.pink[200]}`,
+              color: themeColors.colors.pink[500],
+              cursor: 'pointer',
+              fontSize: '12px',
+              fontWeight: '600',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = withAlpha(themeColors.colors.pink[100], 0.3);
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+            }}
+          >
+            🌐 {language === 'en' ? 'VI' : 'EN'}
+          </button>
           <DarkModeToggle
             checked={isDarkMode}
             onChange={toggleDarkMode}

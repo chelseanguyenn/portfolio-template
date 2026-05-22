@@ -1,15 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import DomeGallery from "../ui/domegallery";
 import { useDarkMode } from "../../contexts/DarkModeContext";
+import { useLanguage } from "../../contexts/LanguageContext";
 import { useThemeColors } from "../../hooks/useThemeColors";
 import { withAlpha } from "../../hooks/useThemeColors";
+import { translations } from "../../constants/translations";
 
 const Skills = () => {
   const [scale, setScale] = useState(0.5);
   const sectionRef = useRef<HTMLDivElement>(null);
   const domeContainerRef = useRef<HTMLDivElement>(null);
   const { isDarkMode } = useDarkMode();
+  const { language } = useLanguage();
   const themeColors = useThemeColors();
+  const t = translations[language];
+  // const { isDarkMode } = useDarkMode();
+  // const themeColors = useThemeColors();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,7 +74,9 @@ const Skills = () => {
         }}
       />
       <div className="container mx-auto px-6 relative" style={{ zIndex: 2 }}>
-        <h2 className="text-4xl font-bold text-center mb-12" style={{ color: isDarkMode ? themeColors.colors.white : themeColors.colors.pink[500] }}>Skills</h2>
+        <h2 className="text-4xl font-bold text-center mb-12" style={{ color: isDarkMode ? themeColors.colors.white : themeColors.colors.pink[500] }}>
+          {t.skills.heading} <em style={{ fontStyle: 'italic', color: themeColors.colors.pink[500] }}>{t.skills.headingHighlight}</em>
+        </h2>
         <div
           ref={domeContainerRef}
           className="relative w-full"

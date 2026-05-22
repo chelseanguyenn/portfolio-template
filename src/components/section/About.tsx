@@ -4,8 +4,10 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import AsciiMorphText from '../AsciiMorphText';
 import TypewriterCarousel from '../TypewriterCarousel';
 import { useDarkMode } from '../../contexts/DarkModeContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { useThemeColors, withAlpha } from '../../hooks/useThemeColors';
-import { aboutMeJournalWebp800, aboutMeJournalWebp400, profile1, profile2, profile3, stickers as stickerImages } from '../../assets';
+import { aboutMeJournalWebp800, aboutMeJournalWebp400, profile1, profile2, profile3, stickers as stickerImages, friendsFamilyPanoramic } from '../../assets';
+import { translations } from '../../constants/translations';
 
 
 const About = () => {
@@ -16,19 +18,16 @@ const About = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
   const { isDarkMode } = useDarkMode();
+  const { language } = useLanguage();
   const themeColors = useThemeColors();
+  const t = translations[language];
 
-  const roles = [
-    'Software Engineer',
-    'Full-Stack Developer',
-    'Systems Engineer',
-    'Frontend Developer',
-  ];
+  const roles = t.hero.roles;
 
   const profileImages = [
-    { src: profile1, caption: "photo 1" },
-    { src: profile2, caption: "photo 2" },
-    { src: profile3, caption: "photo 3" }
+    { src: profile1, caption: "main character" },
+    { src: profile2, caption: "caught at the happiest place on earth" },
+    { src: profile3, caption: "vietnam, i'm in you" }
   ];
 
   const fullAsciiArt = `⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -245,7 +244,33 @@ const About = () => {
         </div>
       </div>
 
-      {/* About Section with Stickers and Journal */}
+      {/* Panoramic Friends & Family Section */}
+      <div className="py-8 md:py-12 px-4 md:px-6">
+        <div className="container mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6" style={{ color: themeColors.text.primary }}>
+            {t.about.friendsFamily}
+          </h2>
+          <div className="relative h-[250px] md:h-[350px] lg:h-[450px] rounded-lg overflow-hidden shadow-lg" style={{ backgroundColor: themeColors.background.card }}>
+            <div
+              className="h-full overflow-x-auto overflow-y-hidden scrollbar-hide scroll-smooth"
+              style={{ scrollBehavior: 'smooth' }}
+            >
+              <img
+                src={friendsFamilyPanoramic}
+                alt="Friends and family panoramic photo"
+                className="h-full w-auto object-cover min-h-full"
+                loading="lazy"
+                style={{ minWidth: 'min-content' }}
+              />
+            </div>
+            <div className="absolute bottom-4 left-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm opacity-75 hover:opacity-100 transition-opacity">
+              {t.about.scrollHint}
+            </div>
+          </div>
+        </div>
+      </div>
+
+
       <div className="py-8 md:py-12" style={{
         background: isDarkMode
           ? 'transparent'

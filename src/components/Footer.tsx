@@ -1,11 +1,15 @@
 import { useDarkMode } from '../contexts/DarkModeContext';
+import { useLanguage } from '../contexts/LanguageContext';
 import { useThemeColors } from '../hooks/useThemeColors';
 import { FileText, ArrowUp } from 'lucide-react';
 import { socialLinks } from '../config/socialLinks';
+import { translations } from '../constants/translations';
 
 const Footer = () => {
   const { isDarkMode } = useDarkMode();
+  const { language } = useLanguage();
   const themeColors = useThemeColors();
+  const t = translations[language];
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
@@ -27,7 +31,7 @@ const Footer = () => {
               </span>
             </div>
             <div className="text-sm" style={{ color: isDarkMode ? themeColors.colors.white : themeColors.colors.pink[700] }}>
-              © {currentYear} Your Name. All rights reserved.
+              © {currentYear} {t.footer.copyright}
             </div>
           </div>
 

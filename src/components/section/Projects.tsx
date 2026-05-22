@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDarkMode } from '../../contexts/DarkModeContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { useThemeColors } from '../../hooks/useThemeColors';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
@@ -9,10 +10,13 @@ import { ExternalLink, Code, Heart, ChevronLeft, ChevronRight } from 'lucide-rea
 import { socialLinks } from '../../config/socialLinks';
 import { lightStars, darkStars, specialStars } from '../../assets/stars';
 import { comingSoon } from '../../assets';
+import { translations } from '../../constants/translations';
 
 const Projects = () => {
   const { isDarkMode } = useDarkMode();
+  const { language } = useLanguage();
   const themeColors = useThemeColors();
+  const t = translations[language];
 
   // track all the random background stars
   const [stars, setStars] = useState<Array<{ id: number; x: number; y: number; image: string; isDragging: boolean }>>([]);
@@ -418,7 +422,9 @@ const Projects = () => {
       <TooltipProvider delayDuration={200}>
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex items-center justify-center gap-1 mb-4">
-            <h2 className="text-4xl font-bold" style={{ color: isDarkMode ? themeColors.colors.white : themeColors.colors.pink[500] }}>Projects</h2>
+            <h2 className="text-4xl font-bold" style={{ color: isDarkMode ? themeColors.colors.white : themeColors.colors.pink[500] }}>
+              {t.projects.heading} <em style={{ fontStyle: 'italic', color: themeColors.colors.pink[500] }}>{t.projects.headingHighlight}</em>
+            </h2>
             <Tooltip>
               <TooltipTrigger asChild>
                 <button 

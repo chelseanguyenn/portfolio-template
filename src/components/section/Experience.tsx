@@ -1,11 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Calendar, MapPin } from 'lucide-react';
 import { useDarkMode } from '../../contexts/DarkModeContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { useThemeColors } from '../../hooks/useThemeColors';
+import { translations } from '../../constants/translations';
 
 const Experience = () => {
   const { isDarkMode } = useDarkMode();
+  const { language } = useLanguage();
   const themeColors = useThemeColors();
+  const t = translations[language];
   const experiences = [
     {
       title: "Your Job Title",
@@ -68,7 +72,7 @@ const Experience = () => {
         }}
       />
       <div className="container mx-auto px-6 relative" style={{ zIndex: 2 }}>
-        <h2 className="text-4xl font-bold text-center mb-6" style={{ color: isDarkMode ? themeColors.colors.white : themeColors.colors.pink[500] }}>Experience</h2>
+        <h2 className="text-4xl font-bold text-center mb-6" style={{ color: isDarkMode ? themeColors.colors.white : themeColors.colors.pink[500] }}>{t.experience.heading}</h2>
 
         <div className="max-w-4xl mx-auto space-y-4">
           {experiences.map((exp, index) => (
