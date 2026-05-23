@@ -6,7 +6,7 @@ export const CustomCursor = () => {
   const ringRef = useRef<HTMLDivElement>(null);
   const mousePos = useRef({ x: 0, y: 0 });
   const ringPos = useRef({ x: 0, y: 0 });
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | null>(null);
   const themeColors = useThemeColors();
 
   useEffect(() => {
