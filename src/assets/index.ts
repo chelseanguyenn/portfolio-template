@@ -2,6 +2,7 @@
 import aboutMeJournalPng from './journal.PNG';
 import aboutMeJournalWebp800 from './journal.PNG';
 import aboutMeJournalWebp400 from './journal.PNG';
+
 // Add your profile images here
 // Profile images
 import profile1 from './aboutme/me.png';
@@ -10,6 +11,8 @@ import profile3 from './aboutme/me_vietnam.png';
 
 // Panoramic
 import friendsFamilyPanoramic from './aboutme/friends_family_panoramic.png';
+
+export { default as journalSpread } from './aboutme/journal-spread.png'
 
 import comingSoon from './coming_soon.png';
 import dividerPng from './divider.PNG';
