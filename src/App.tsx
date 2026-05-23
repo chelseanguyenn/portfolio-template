@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { DarkModeProvider, useDarkMode } from './contexts/DarkModeContext'
 import { LanguageProvider } from './contexts/LanguageContext'
@@ -7,6 +7,7 @@ import { colors } from './styles/colors'
 import Navigation from './components/section/Navigation'
 import About from './components/section/About'
 import { CustomCursor } from './components/CustomCursor'
+import InteractiveTerminal from './components/ui/InteractiveTerminal'
 import { divider } from './assets'
 import './App.css'
 
@@ -87,10 +88,11 @@ function HomePage() {
 
 function AppContent() {
   const { isDarkMode } = useDarkMode();
+  const [termOpen, setTermOpen] = useState(false);
 
   return (
     <>
-      <Navigation />
+      <Navigation termOpen={termOpen} setTermOpen={setTermOpen} />
       <div className="app transition-colors duration-300" style={{ backgroundColor: isDarkMode ? '#101727' : undefined }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <main id="main-content" className="main-content">
@@ -107,6 +109,11 @@ function AppContent() {
           <Footer />
         </Suspense>
       </div>
+
+      {/* Floating terminal — renders on top of everything */}
+      {termOpen && (
+        <InteractiveTerminal onClose={() => setTermOpen(false)} />
+      )}
     </>
   )
 }

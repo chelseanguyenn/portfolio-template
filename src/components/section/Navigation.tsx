@@ -8,7 +8,12 @@ import { useThemeColors, withAlpha } from '../../hooks/useThemeColors';
 import { useClock } from '../../hooks/useClock';
 import { translations } from '../../constants/translations';
 
-const Navigation = () => {
+interface NavigationProps {
+  termOpen: boolean;
+  setTermOpen: (open: boolean) => void;
+}
+
+const Navigation = ({ termOpen, setTermOpen }: NavigationProps) => {
   const [activeTab, setActiveTab] = useState('about');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -28,10 +33,8 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Check if scrolled
       setIsScrolled(window.scrollY > 10);
 
-      // Update active tab
       const sections = tabs.map(tab => tab.id);
       const currentSection = sections.find(section => {
         const element = document.getElementById(section);
@@ -48,7 +51,6 @@ const Navigation = () => {
     };
 
     const handleResize = () => {
-      // Close mobile menu if screen becomes desktop size
       if (window.innerWidth >= 768 && isMobileMenuOpen) {
         setIsMobileMenuOpen(false);
       }
@@ -63,10 +65,8 @@ const Navigation = () => {
   }, [tabs, isMobileMenuOpen]);
 
   const scrollToSection = (sectionId: string) => {
-    // If we're not on the home page, navigate there first
     if (location.pathname !== '/') {
       navigate('/', { replace: true });
-      // Wait for navigation and then scroll
       setTimeout(() => {
         const element = document.getElementById(sectionId);
         if (element) {
@@ -74,17 +74,40 @@ const Navigation = () => {
         }
       }, 100);
     } else {
-      // We're already on the home page, just scroll
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     }
-    setIsMobileMenuOpen(false); // Close mobile menu after navigation
+    setIsMobileMenuOpen(false);
   };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  // Shared terminal button style
+  const terminalBtnStyle: React.CSSProperties = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: 5,
+    padding: '6px 12px',
+    borderRadius: '8px',
+    fontSize: '11px',
+    fontWeight: 700,
+    fontFamily: "'SF Mono', 'Fira Code', monospace",
+    letterSpacing: '0.04em',
+    border: `1px solid ${termOpen
+      ? themeColors.colors.pink[300]
+      : themeColors.colors.pink[200]}`,
+    background: termOpen
+      ? withAlpha(themeColors.colors.pink[300], 0.15)
+      : 'transparent',
+    color: termOpen
+      ? themeColors.colors.pink[400]
+      : themeColors.colors.pink[500],
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
   };
 
   return (
@@ -119,7 +142,7 @@ const Navigation = () => {
             WebkitTextFillColor: themeColors.colors.pink[500]
           }}
           onClick={() => window.location.href = '/'}
-          aria-label="Your Name - Go to homepage">
+          aria-label="Chelsea - Go to homepage">
           chelsea
         </button>
         
@@ -153,6 +176,28 @@ const Navigation = () => {
             >
               {clock}
             </div>
+
+            {/* Terminal Toggle */}
+            <button
+              onClick={() => setTermOpen(!termOpen)}
+              aria-label="Toggle terminal"
+              aria-pressed={termOpen}
+              style={terminalBtnStyle}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = withAlpha(themeColors.colors.pink[300], 0.15);
+                e.currentTarget.style.borderColor = themeColors.colors.pink[300];
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = termOpen
+                  ? withAlpha(themeColors.colors.pink[300], 0.15)
+                  : 'transparent';
+                e.currentTarget.style.borderColor = termOpen
+                  ? themeColors.colors.pink[300]
+                  : themeColors.colors.pink[200];
+              }}
+            >
+              &gt;_ terminal
+            </button>
 
             {/* Language Toggle */}
             <button
@@ -333,6 +378,17 @@ const Navigation = () => {
           >
             {clock}
           </div>
+
+          {/* Terminal Toggle — mobile */}
+          <button
+            onClick={() => { setTermOpen(!termOpen); setIsMobileMenuOpen(false); }}
+            aria-label="Toggle terminal"
+            aria-pressed={termOpen}
+            style={terminalBtnStyle}
+          >
+            &gt;_ terminal
+          </button>
+
           <button
             onClick={toggleLanguage}
             title={language === 'en' ? 'Switch to Tiếng Việt' : 'Switch to English'}

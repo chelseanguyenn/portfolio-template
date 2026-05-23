@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import AsciiMorphText from '../AsciiMorphText';
 import TypewriterCarousel from '../TypewriterCarousel';
+// import InteractiveTerminal from '../ui/InteractiveTerminal';
 import { useDarkMode } from '../../contexts/DarkModeContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useThemeColors, withAlpha } from '../../hooks/useThemeColors';
@@ -212,7 +213,7 @@ const About = () => {
           <div className="flex flex-col md:flex-row justify-between items-start max-w-6xl mx-auto gap-8">
             <div className="text-left w-full md:w-auto">
               <div className="ascii-container justify-start text-3xl md:text-4xl lg:text-5xl">
-                <AsciiMorphText text="Hi, I'm Your Name" />
+                <AsciiMorphText text="Hi, I'm Chelsea Nguyen" />
               </div>
               <div className="hero-subtitle justify-start text-base md:text-lg lg:text-xl mt-2">
                 <div className="flex flex-wrap items-center justify-start">
@@ -220,7 +221,7 @@ const About = () => {
                   <TypewriterCarousel roles={roles} className={isDarkMode ? 'hero-subtitle-dark' : 'hero-subtitle-light'} />
                 </div>
               </div>
-              <div className="hero-buttons flex justify-start gap-3 mt-4">
+              <div className="hero-buttons flex flex-col sm:flex-row justify-start gap-3 mt-4">
                 <button
                   className="hero-action-btn text-sm md:text-base px-4 py-2 md:px-5 md:py-2.5"
                   onClick={() => {
@@ -250,7 +251,7 @@ const About = () => {
           <h2 className="text-2xl md:text-3xl font-bold mb-6" style={{ color: themeColors.text.primary }}>
             {t.about.friendsFamily}
           </h2>
-          <div className="relative h-[250px] md:h-[350px] lg:h-[450px] rounded-lg overflow-hidden shadow-lg" style={{ backgroundColor: themeColors.background.card }}>
+          <div className="relative h-[250px] md:h-[350px] lg:h-[450px] rounded-lg overflow-hidden shadow-lg" style={{ backgroundColor: themeColors.card.background }}>
             <div
               className="h-full overflow-x-auto overflow-y-hidden scrollbar-hide scroll-smooth"
               style={{ scrollBehavior: 'smooth' }}
