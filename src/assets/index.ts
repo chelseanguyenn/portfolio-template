@@ -14,6 +14,17 @@ import friendsFamilyPanoramic from './aboutme/friends_family_panoramic.png';
 
 export { default as journalSpread } from './aboutme/journal-spread.png'
 
+// Sticky notes - English
+import noteWhoEn from './notes/note-who.png';
+import noteBuildEn from './notes/note-build.png';
+import noteClockEn from './notes/note-clock.png';
+
+// Sticky notes - Vietnamese
+import noteWhoVi from './notes/note-who-vi.png';
+import noteBuildVi from './notes/note-build-vi.png';
+import noteClockVi from './notes/note-clock-vi.png';
+
+
 import comingSoon from './coming_soon.png';
 import dividerPng from './divider.PNG';
 import dividerWebp from './divider-original.webp';
@@ -57,6 +68,15 @@ export {
   divider,
   dividerPng,
   dividerWebp,
+};
+
+export {
+  noteWhoEn,
+  noteBuildEn,
+  noteClockEn,
+  noteWhoVi,
+  noteBuildVi,
+  noteClockVi,
 };
 
 export default {

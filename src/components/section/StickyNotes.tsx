@@ -1,35 +1,42 @@
-import noteWho from '../../assets/notes/note-who.png'
-import noteBuild from '../../assets/notes/note-build.png'
-import noteClock from '../../assets/notes/note-clock.png'
-
-const notes = [
-  {
-    id: 1,
-    src: noteWho,
-    alt: 'who am i — chelsea nguyen, cs student at UMass Boston, viet-american',
-    rotate: '-6deg',
-    zIndex: 2,
-    hoverRotate: '-1deg',
-  },
-  {
-    id: 2,
-    src: noteBuild,
-    alt: 'what i build — ui/ux, frontend, swe, ai/ml',
-    rotate: '4deg',
-    zIndex: 4,
-    hoverRotate: '1deg',
-  },
-  {
-    id: 3,
-    src: noteClock,
-    alt: 'off the clock — running, journaling, rock-climbing, matcha runs and more',
-    rotate: '-3deg',
-    zIndex: 3,
-    hoverRotate: '-0.5deg',
-  },
-]
+import { useLanguage } from '../../contexts/LanguageContext';
+import noteWhoEn from '../../assets/notes/note-who.png';
+import noteBuildEn from '../../assets/notes/note-build.png';
+import noteClockEn from '../../assets/notes/note-clock.png';
+import noteWhoVi from '../../assets/notes/note-who-vi.png';
+import noteBuildVi from '../../assets/notes/note-build-vi.png';
+import noteClockVi from '../../assets/notes/note-clock-vi.png';
 
 const StickyNotes = () => {
+  const { language } = useLanguage();
+  const isVi = language === 'vi';
+
+  const notes = [
+    {
+      id: 1,
+      src: isVi ? noteWhoVi : noteWhoEn,
+      alt: 'who am i — chelsea nguyen, cs student at UMass Boston, viet-american',
+      rotate: '-6deg',
+      zIndex: 2,
+      hoverRotate: '-1deg',
+    },
+    {
+      id: 2,
+      src: isVi ? noteBuildVi : noteBuildEn,
+      alt: 'what i build — ui/ux, frontend, swe, ai/ml',
+      rotate: '4deg',
+      zIndex: 4,
+      hoverRotate: '1deg',
+    },
+    {
+      id: 3,
+      src: isVi ? noteClockVi : noteClockEn,
+      alt: 'off the clock — running, journaling, rock-climbing, matcha runs and more',
+      rotate: '-3deg',
+      zIndex: 3,
+      hoverRotate: '-0.5deg',
+    },
+  ]
+
   return (
     <section
       style={{
@@ -39,7 +46,6 @@ const StickyNotes = () => {
         overflow: 'visible',
       }}
     >
-      {/* Centered section label */}
       <p style={{
         fontSize: 11,
         fontWeight: 700,

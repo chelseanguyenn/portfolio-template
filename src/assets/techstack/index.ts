@@ -34,6 +34,18 @@ import UnityLight from './Unity-Light.svg';
 import VercelLight from './Vercel-Light.svg';
 import ViteLight from './Vite-Light.svg';
 
+// New icons
+import Matlab from './matlab_logo.svg';
+import NumPy from './numpy_logo.svg';
+import Python from './python_logo.svg';
+import PyTorch from './pytorch_logo.svg';
+import R from './r_logo.svg';
+import RStudio from './rstudio_logo.svg';
+import SFML from './sfml_logo.svg';
+import Streamlit from './streamlit_logo.svg';
+import Django from './django.svg';
+import Netlify from './netlify_logo.svg';
+
 export const techStackIcons = {
   AWSLight,
   Bootstrap,
@@ -69,6 +81,17 @@ export const techStackIcons = {
   UnityLight,
   VercelLight,
   ViteLight,
+  // New icons
+  Matlab,
+  NumPy,
+  Python,
+  PyTorch,
+  R,
+  RStudio,
+  SFML,
+  Streamlit,
+  Django,
+  Netlify,
 };
 
 // Export as array for easier iteration if needed
