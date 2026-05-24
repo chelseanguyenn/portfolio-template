@@ -219,23 +219,36 @@ const About = () => {
             <span style={{ flex: 1, maxWidth: 80, height: 1.5, background: '#C88B95', display: 'inline-block' }} />
           </p>
           <div
-            className="relative h-[250px] md:h-[350px] lg:h-[450px] rounded-lg overflow-hidden shadow-lg"
+            className="relative rounded-lg overflow-hidden shadow-lg"
             style={{ backgroundColor: themeColors.card.background, maxWidth: 900, margin: '0 auto' }}
           >
-            <div
-              className="h-full overflow-x-auto overflow-y-hidden scrollbar-hide scroll-smooth"
-              style={{ scrollBehavior: 'smooth' }}
-            >
+            {/* Mobile: full image visible, scaled to width */}
+            <div className="block md:hidden w-full">
               <img
                 src={friendsFamilyPanoramic}
                 alt="Friends and family panoramic photo"
-                className="h-full w-auto object-cover min-h-full"
+                className="w-full h-auto"
                 loading="lazy"
-                style={{ minWidth: 'min-content' }}
               />
             </div>
-            <div className="absolute bottom-4 left-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm opacity-75 hover:opacity-100 transition-opacity">
-              {t.about.scrollHint}
+
+            {/* Desktop: fixed height with horizontal scroll */}
+            <div className="hidden md:block relative h-[350px] lg:h-[450px]">
+              <div
+                className="h-full overflow-x-auto overflow-y-hidden scrollbar-hide"
+                style={{ scrollBehavior: 'smooth' }}
+              >
+                <img
+                  src={friendsFamilyPanoramic}
+                  alt="Friends and family panoramic photo"
+                  className="h-full w-auto object-cover min-h-full"
+                  loading="lazy"
+                  style={{ minWidth: 'min-content' }}
+                />
+              </div>
+              <div className="absolute bottom-4 left-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm opacity-75 hover:opacity-100 transition-opacity">
+                {t.about.scrollHint}
+              </div>
             </div>
           </div>
         </div>
