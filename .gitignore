@@ -340,3 +340,8 @@ scripts/.cache/
 # GitHub files
 .github/
 .gitlab/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
