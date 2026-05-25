@@ -3,149 +3,115 @@ import { useDarkMode } from '../../contexts/DarkModeContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useThemeColors } from '../../hooks/useThemeColors';
 import { translations } from '../../constants/translations';
+import type { TranslationKeys } from '../../constants/translations';
 
-const sections = [
+const getSections = (t: TranslationKeys) => [
   {
-    label: 'Research & Programs',
+    label: t.experience.sections.research,
     entries: [
       {
         emoji: '🛢️',
-        title: 'Research Participant',
-        org: 'AI4ALL — Deep Learning for Marine Oil Spill Detection',
+        title: t.experience.entries.ai4all.title,
+        org: t.experience.entries.ai4all.org,
         period: 'Jun 2025 – Oct 2025',
         location: 'Remote',
-        bullets: [
-          'Achieved 90% validation accuracy using transfer learning with ResNet-18, dropout regularization, and hyperparameter tuning on satellite imagery.',
-          'Built an end-to-end binary image classification pipeline with PyTorch and TensorFlow on 300+ augmented satellite images.',
-          'Collaborated with a team of 4 to optimize model performance for an environmental monitoring pipeline.',
-        ],
+        bullets: t.experience.entries.ai4all.bullets,
         pills: ['PyTorch', 'TensorFlow', 'ResNet-18', 'Computer Vision'],
       },
       {
         emoji: '🚀',
-        title: 'Academy Participant',
-        org: "NASA L'SPACE — Proposal Writing & Evaluation",
+        title: t.experience.entries.nasa.title,
+        org: t.experience.entries.nasa.org,
         period: 'May 2025 – Aug 2025',
         location: 'Remote',
-        bullets: [
-          'Led technical development as Lead Scientist & Programmer for iGIBOD, an AI-driven satellite concept applying computer vision to autonomous orbital debris detection.',
-          'Participated in a peer review panel evaluating NASA-style technical proposals and providing structured feedback.',
-        ],
+        bullets: t.experience.entries.nasa.bullets,
         pills: ['Computer Vision', 'Python', 'AI/ML'],
       },
       {
         emoji: '📚',
-        title: 'Student Engineer',
-        org: 'CodePath — Technical Interview Prep & Cybersecurity',
+        title: t.experience.entries.codepath.title,
+        org: t.experience.entries.codepath.org,
         period: 'Jun 2025 – Aug 2025',
         location: 'Remote',
-        bullets: [
-          'Completed Technical Interview Prep covering data structures, algorithms, and system design.',
-          'Completed Cybersecurity 102 covering security fundamentals, vulnerability assessment, and secure coding practices.',
-        ],
+        bullets: t.experience.entries.codepath.bullets,
         pills: ['DSA', 'Cybersecurity', 'System Design'],
       },
       {
         emoji: '👩‍💻',
-        title: 'Summer Immersion Participant',
-        org: 'Girls Who Code',
+        title: t.experience.entries.gwc.title,
+        org: t.experience.entries.gwc.org,
         period: 'Jun 2020 – Jul 2020',
         location: 'Remote',
-        bullets: [
-          'Received hands-on instruction in web graphic design, web development, and web personality tests.',
-          'Applied coding skills to build web graphic design and interactive personality test projects.',
-        ],
+        bullets: t.experience.entries.gwc.bullets,
         pills: ['HTML/CSS', 'Web Design'],
       },
     ],
   },
   {
-    label: 'Education',
+    label: t.experience.sections.education,
     entries: [
       {
         emoji: '🎓',
-        title: 'B.S. Computer Science',
-        org: 'University of Massachusetts Boston',
+        title: t.experience.entries.umassbs.title,
+        org: t.experience.entries.umassbs.org,
         period: 'Sept 2024 – Dec 2026',
         location: 'Boston, MA',
-        bullets: [
-          'On track to receive a Bachelor of Science in Computer Science.',
-          'Completed courses including Data Structures, Algorithms, Calculus 1 & 2, Physics 1 & 2, Discrete Math, and Introduction to Electrical & Computer Engineering.',
-        ],
+        bullets: t.experience.entries.umassbs.bullets,
         pills: [],
       },
     ],
   },
   {
-    label: 'Leadership & Community',
+    label: t.experience.sections.leadership,
     entries: [
       {
         emoji: '🌸',
-        title: 'President',
-        org: 'Women in Computer Science, UMass Boston',
+        title: t.experience.entries.wics.title,
+        org: t.experience.entries.wics.org,
         period: 'Sep 2024 – Present',
         location: 'Boston, MA',
-        bullets: [
-          'Spearheaded partnerships with CS organizations across universities to expand recruiting pipelines and technical networking for underrepresented students.',
-          'Facilitated conferences and networking opportunities through collaboration with nearby university CS clubs.',
-          'Promoted diversity and inclusion in tech through community-building initiatives.',
-        ],
+        bullets: t.experience.entries.wics.bullets,
         pills: [],
       },
       {
         emoji: '🇻🇳',
-        title: 'Member',
-        org: 'UMass Boston Vietnamese Student Association (VSA)',
+        title: t.experience.entries.vsa.title,
+        org: t.experience.entries.vsa.org,
         period: 'Dec 2024 – Present',
         location: 'Boston, MA',
-        bullets: [
-          'Foster a safe and welcoming community where members can socialize, connect, and learn from one another.',
-          'Promote awareness of Vietnamese and Vietnamese-American culture and experiences at UMass Boston.',
-          'Collaborate with other UMB organizations and serve local nonprofits to support members\' personal, social, and professional growth.',
-        ],
+        bullets: t.experience.entries.vsa.bullets,
         pills: [],
       },
     ],
   },
   {
-    label: 'Work Experience',
+    label: t.experience.sections.work,
     entries: [
       {
         emoji: '🧋',
-        title: 'Team Member',
-        org: 'Tastea',
+        title: t.experience.entries.tastea.title,
+        org: t.experience.entries.tastea.org,
         period: 'Apr 2023 – Aug 2024',
         location: 'Fountain Valley, CA',
-        bullets: [
-          'Maintain knowledge of 20+ drink recipes and prepare them accurately for 70+ daily customers in a fast-paced environment.',
-          'Collaborate with 5–10 team members and assist during busy hours.',
-          'Train new onboarding team members.',
-        ],
+        bullets: t.experience.entries.tastea.bullets,
         pills: [],
       },
       {
         emoji: '🥷',
-        title: 'Sensei',
-        org: 'Code Ninjas',
+        title: t.experience.entries.codeninjas.title,
+        org: t.experience.entries.codeninjas.org,
         period: 'Apr 2022 – Nov 2022',
         location: 'Los Alamitos-Cypress, CA',
-        bullets: [
-          'Taught students coding languages including Scratch and Roblox Lua, guiding them through game coding projects.',
-          'Created an engaging environment fostering coding skill development through a game-based curriculum.',
-          'Set learning objectives and tracked student progress.',
-        ],
+        bullets: t.experience.entries.codeninjas.bullets,
         pills: ['Scratch', 'Roblox Lua', 'Teaching'],
       },
       {
         emoji: '📖',
-        title: 'Tutor',
-        org: 'Private Tutoring',
+        title: t.experience.entries.tutoring.title,
+        org: t.experience.entries.tutoring.org,
         period: 'Sep 2018 – May 2023',
         location: '',
-        bullets: [
-          'Provided after-school tutoring for students from Pre-K to 6th grade.',
-          'Discussed student performance with parents and maintained a positive learning environment.',
-        ],
+        bullets: t.experience.entries.tutoring.bullets,
         pills: [],
       },
     ],
@@ -157,6 +123,7 @@ const Experience = () => {
   const { language } = useLanguage();
   const themeColors = useThemeColors();
   const t = translations[language];
+  const sections = getSections(t);
 
   return (
     <section
@@ -198,10 +165,10 @@ const Experience = () => {
             <span style={{ color: isDarkMode ? themeColors.colors.pink[300] : themeColors.colors.pink[400] }}>
               &amp;
             </span>{' '}
-            Education
+            {t.experience.sections.education}
           </h2>
           <p className="mt-2 text-sm italic" style={{ color: isDarkMode ? themeColors.colors.dark[400] : themeColors.colors.dark[500] }}>
-            a mix of work, research, programs, and leadership ✦
+            {t.experience.subheading}
           </p>
         </div>
 

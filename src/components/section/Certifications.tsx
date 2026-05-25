@@ -1,48 +1,54 @@
 import { useDarkMode } from '../../contexts/DarkModeContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { useThemeColors } from '../../hooks/useThemeColors';
+import { translations } from '../../constants/translations';
+import type { TranslationKeys } from '../../constants/translations';
 import codepathCyberBadge from '../../assets/badges/codepath_cybersecurity.webp';
 import codepathTipBadge from '../../assets/badges/codepath_tip.webp';
 import linkedinRBadge from '../../assets/badges/linkedin_r.webp';
 import nasaNpweeBadge from '../../assets/badges/nasa_npwee.webp';
 
+const getBadges = (t: TranslationKeys) => [
+  {
+    id: 'codepath-tip',
+    image: codepathTipBadge,
+    alt: 'CodePath Technical Interview Prep badge',
+    title: t.certifications.badges.codepathTip.title,
+    subtitle: t.certifications.badges.codepathTip.subtitle,
+    credentialUrl: '',
+  },
+  {
+    id: 'codepath-cyber',
+    image: codepathCyberBadge,
+    alt: 'CodePath Cybersecurity badge',
+    title: t.certifications.badges.codepathCyber.title,
+    subtitle: t.certifications.badges.codepathCyber.subtitle,
+    credentialUrl: '',
+  },
+  {
+    id: 'nasa-npwee',
+    image: nasaNpweeBadge,
+    alt: 'NASA NPWEE badge',
+    title: t.certifications.badges.nasaNpwee.title,
+    subtitle: t.certifications.badges.nasaNpwee.subtitle,
+    credentialUrl: '',
+  },
+  {
+    id: 'linkedin-r',
+    image: linkedinRBadge,
+    alt: 'LinkedIn Learning R badge',
+    title: t.certifications.badges.linkedinR.title,
+    subtitle: t.certifications.badges.linkedinR.subtitle,
+    credentialUrl: '',
+  },
+];
+
 const Certifications = () => {
   const { isDarkMode } = useDarkMode();
+  const { language } = useLanguage();
   const themeColors = useThemeColors();
-
-  const badges = [
-    {
-      id: 'codepath-tip',
-      image: codepathTipBadge,
-      alt: 'CodePath Intermediate Technical Interview Prep Certificate',
-      title: 'Intermediate Technical Interview Prep',
-      subtitle: 'CodePath · Summer 2025',
-      credentialUrl: '',
-    },
-    {
-      id: 'codepath-cyber',
-      image: codepathCyberBadge,
-      alt: 'CodePath Intermediate Cybersecurity Certificate',
-      title: 'Intermediate Cybersecurity',
-      subtitle: 'CodePath · Summer 2025 · Honors',
-      credentialUrl: '',
-    },
-    {
-      id: 'nasa-npwee',
-      image: nasaNpweeBadge,
-      alt: 'NASA Proposal Writing and Evaluation Experience Academy Certificate',
-      title: "NASA Proposal Writing & Evaluation Experience Academy",
-      subtitle: "NASA L'SPACE · Summer 2025",
-      credentialUrl: '',
-    },
-    {
-      id: 'linkedin-r',
-      image: linkedinRBadge,
-      alt: 'LinkedIn Learning R for Data Science Certificate',
-      title: 'R for Data Science: Analysis and Visualization',
-      subtitle: 'LinkedIn Learning · Sep 2025',
-      credentialUrl: '',
-    },
-  ];
+  const t = translations[language];
+  const badges = getBadges(t);
 
   return (
     <section
@@ -58,7 +64,7 @@ const Certifications = () => {
           className="text-4xl font-bold text-center mb-10"
           style={{ color: isDarkMode ? themeColors.colors.white : themeColors.colors.pink[500] }}
         >
-          Certifications & Credentials
+          {t.certifications.heading}
         </h2>
 
         <div className="max-w-5xl mx-auto">

@@ -8,7 +8,15 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { useThemeColors, withAlpha } from '../../hooks/useThemeColors';
 import { profile1, profile2, profile3, stickers as stickerImages, friendsFamilyPanoramic, journalSpread } from '../../assets';
 import { translations } from '../../constants/translations';
+import type { TranslationKeys } from '../../constants/translations';
 import StickyNotes from '../section/StickyNotes';
+
+// ── Defined outside the component so it's available before the component runs ─
+const getProfileImages = (t: TranslationKeys) => [
+  { src: profile1, caption: t.about.profileCaptions[0] },
+  { src: profile2, caption: t.about.profileCaptions[1] },
+  { src: profile3, caption: t.about.profileCaptions[2] },
+];
 
 const About = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -21,14 +29,8 @@ const About = () => {
   const { language } = useLanguage();
   const themeColors = useThemeColors();
   const t = translations[language];
-
+  const profileImages = getProfileImages(t);
   const roles = t.hero.roles;
-
-  const profileImages = [
-    { src: profile1, caption: "main character" },
-    { src: profile2, caption: "caught at the happiest place on earth" },
-    { src: profile3, caption: "vietnam, i'm in you" }
-  ];
 
   const fullAsciiArt = `⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⢠⡾⠲⠶⣤⣀⣠⣤⣤⣤⡿⠛⠿⡴⠾⠛⢻⡆⠀⠀⠀
@@ -169,11 +171,11 @@ const About = () => {
           <div className="flex flex-col md:flex-row justify-between items-start max-w-6xl mx-auto gap-8">
             <div className="text-left w-full md:w-auto">
               <div className="ascii-container justify-start text-3xl md:text-4xl lg:text-5xl">
-                <AsciiMorphText text="Hi, I'm Chelsea Nguyen" />
+                <AsciiMorphText text={t.hero.name} />
               </div>
               <div className="hero-subtitle justify-start text-base md:text-lg lg:text-xl mt-2">
                 <div className="flex flex-wrap items-center justify-start">
-                  <span className={isDarkMode ? 'hero-subtitle-dark' : 'hero-subtitle-light'}>I am a&nbsp;</span>
+                  <span className={isDarkMode ? 'hero-subtitle-dark' : 'hero-subtitle-light'}>{t.hero.iAmA}&nbsp;</span>
                   <TypewriterCarousel roles={roles} className={isDarkMode ? 'hero-subtitle-dark' : 'hero-subtitle-light'} />
                 </div>
               </div>
@@ -182,10 +184,10 @@ const About = () => {
                   className="hero-action-btn text-sm md:text-base px-4 py-2 md:px-5 md:py-2.5"
                   onClick={() => window.open('/resume.pdf', '_blank')}
                 >
-                  Resume →
+                  {t.hero.resume}
                 </button>
                 <Link to="/contact" className="hero-action-btn text-sm md:text-base px-4 py-2 md:px-5 md:py-2.5">
-                  Contact →
+                  {t.hero.contact}
                 </Link>
               </div>
             </div>
@@ -273,16 +275,16 @@ const About = () => {
                     alt=""
                     className="absolute z-10 pointer-events-none select-none"
                     style={getStickerStyle(sticker)}
-                    loading={sticker.id <= 4 ? "eager" : "lazy"}
+                    loading={sticker.id <= 4 ? 'eager' : 'lazy'}
                     decoding="async"
-                    width={isVerySmall ? "50" : isMobile ? "60" : "80"}
-                    height={isVerySmall ? "50" : isMobile ? "60" : "80"}
+                    width={isVerySmall ? '50' : isMobile ? '60' : '80'}
+                    height={isVerySmall ? '50' : isMobile ? '60' : '80'}
                   />
                 );
               })}
             </div>
 
-            {/* ── Journal image — NO <picture> wrapper ── */}
+            {/* ── Journal image ── */}
             <div className="w-full md:max-w-2xl lg:max-w-4xl relative z-20 px-1 md:px-0">
               <img
                 src={journalSpread}

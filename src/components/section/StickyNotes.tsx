@@ -5,9 +5,11 @@ import noteClockEn from '../../assets/notes/note-clock.png';
 import noteWhoVi from '../../assets/notes/note-who-vi.png';
 import noteBuildVi from '../../assets/notes/note-build-vi.png';
 import noteClockVi from '../../assets/notes/note-clock-vi.png';
+import { translations } from '../../constants/translations';
 
 const StickyNotes = () => {
   const { language } = useLanguage();
+  const t = translations[language];
   const isVi = language === 'vi';
 
   const notes = [
@@ -59,7 +61,7 @@ const StickyNotes = () => {
         gap: 8,
       }}>
         <span style={{ width: 18, height: 1.5, background: '#C88B95', display: 'inline-block' }} />
-        a little about me
+        {t.about.stickyNotesLabel}
         <span style={{ width: 18, height: 1.5, background: '#C88B95', display: 'inline-block' }} />
       </p>
 
